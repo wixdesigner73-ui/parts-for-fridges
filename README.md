@@ -21,8 +21,8 @@ Open `index.html` (hash-routed, no build step). Add `?sample=1` to preview produ
 Search rules: case-insensitive, spaces and hyphens ignored, `/` preserved (`/00` ≠ `/02`), complete identifiers only, ambiguous keys → "no exact match".
 
 ## Open items
-- Client colours/fonts not supplied: tokens in `:root` of `styles.css` are a proposal.
-- Brand logos: wordmark placeholders – use client-supplied logo files.
+- Brand: Blue #003EEE, Aqua #01B0B8, white background, Inter (client-supplied). Tokens in `:root` of `styles.css`.
+- Logos: client JPEGs had solid black backgrounds; the black was keyed to transparent PNG (`img/logo.png`, `img/icon.png`, favicons) with no recolouring. Ask the client for transparent/SVG originals.
 - Policy pages show "Client-approved content to be added".
 
 ## Photography (`img/`)

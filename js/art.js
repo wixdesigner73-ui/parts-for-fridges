@@ -9,7 +9,7 @@ window.PFFArt = (function () {
   '<linearGradient id="g-dark" x1="0" x2="1"><stop offset="0" stop-color="#1b252b"/><stop offset=".5" stop-color="#46535a"/><stop offset="1" stop-color="#151d22"/></linearGradient>' +
   '<linearGradient id="g-glass" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".85"/><stop offset=".45" stop-color="#cfe6ee" stop-opacity=".35"/><stop offset="1" stop-color="#9fc4d1" stop-opacity=".55"/></linearGradient>' +
   '<linearGradient id="g-frost" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".9"/><stop offset="1" stop-color="#d7e6eb" stop-opacity=".6"/></linearGradient>' +
-  '<linearGradient id="g-blue" x1="0" x2="1"><stop offset="0" stop-color="#6fa3b8"/><stop offset=".4" stop-color="#cfe8f1"/><stop offset="1" stop-color="#5f93a9"/></linearGradient>' +
+  '<linearGradient id="g-blue" x1="0" x2="1"><stop offset="0" stop-color="#2fb5bc"/><stop offset=".4" stop-color="#d4f4f6"/><stop offset="1" stop-color="#01B0B8"/></linearGradient>' +
   '<linearGradient id="g-rubber" x1="0" x2="1"><stop offset="0" stop-color="#232b30"/><stop offset=".5" stop-color="#3b464c"/><stop offset="1" stop-color="#1b2226"/></linearGradient>' +
   '<radialGradient id="g-shadow"><stop offset="0" stop-color="#0e1a21" stop-opacity=".45"/><stop offset="1" stop-color="#0e1a21" stop-opacity="0"/></radialGradient>' +
   '</defs></svg>';

@@ -61,8 +61,7 @@
     return '<button class="btn btn-primary" type="button" data-request="' + kind + '" data-value="' + esc(value || '') + '">' + esc(label || 'Request a Part') + '</button>';
   }
   function brandCard(b, i) {
-    var ph=['hero-kitchen','dispenser-detail','kitchen-wide','open-fridge'][i%4];
-    return '<a class="brand-card reveal" style="--d:' + (i % 3) * 0.07 + 's;--pos:'+['70% 40%','50% 30%','30% 55%','60% 50%'][i%4]+'" href="#/brand/' + b.slug + '" aria-label="' + esc(b.name) + ' refrigerator parts"><img class="bc-img" src="img/'+ph+'.jpg" alt="" loading="lazy" style="object-position:var(--pos)">' +
+        return '<a class="brand-card reveal" style="--d:' + (i % 3) * 0.07 + 's" href="#/brand/' + b.slug + '" aria-label="' + esc(b.name) + ' refrigerator parts">' +
       '<span class="brand-logo">' + esc(b.name) + '</span>' +
       '<span class="brand-meta"><span>Refrigerator Parts</span><span class="arrow">' + ICON.arrow + '</span></span></a>';
   }
@@ -99,9 +98,8 @@
     m.hidden = !open; t.setAttribute('aria-expanded', open ? 'true' : 'false'); document.body.classList.toggle('mega-open', open);
   }
   function renderHeader() {
-    var mq=['Refrigerator Replacement Parts','Search by Model Number','Search by Manufacturer Part Number','Browse by Brand','Request a Part'].map(function(t){return '<span>'+t+'</span>';}).join('');
-    document.getElementById('header').innerHTML = '<div class="marquee" aria-hidden="true"><div class="mq-track">'+mq+mq+mq+mq+'</div></div><div class="wrap"><div class="hd-top">' +
-      '<a class="logo" href="#/" aria-label="Parts For Fridges – Home"><span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M6 10h12M9 5.5v2M9 13v3"/></svg></span>Parts For Fridges</a>' +
+        document.getElementById('header').innerHTML = '<div class="wrap"><div class="hd-top">' +
+      '<a class="logo" href="#/" aria-label="Parts For Fridges – Home"><img src="img/logo.png" alt="Parts For Fridges" width="200" height="38"></a>' +
       '<div class="hd-search">' + searchForm({ ph: 'Search by model number or part number', label: 'Site search' }) + '</div>' +
       '<button class="cart-btn" type="button" data-open-cart aria-label="Open cart">' + ICON.cart + '<span class="cart-count" hidden>0</span></button></div>' +
       '<nav class="hd-nav" aria-label="Main"><a href="#/" data-nav="home">Home</a><span class="nav-mega"><a href="#/brands" data-nav="brands">Brands</a><button class="mega-toggle" type="button" data-mega-toggle aria-expanded="false" aria-controls="mega" aria-label="Show all brands and models"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"/></svg></button></span></nav>' + megaMenu() + '</div>';
@@ -109,7 +107,7 @@
   }
   function renderFooter() {
     document.getElementById('footer').innerHTML = '<div class="wrap"><div class="ft-grid">' +
-      '<div class="ft-brand"><a class="logo" href="#/">Parts For Fridges</a><p>Find refrigerator replacement parts by brand, model number or manufacturer part number.</p></div>' +
+      '<div class="ft-brand"><a class="logo" href="#/"><img src="img/logo.png" alt="Parts For Fridges" width="200" height="38"></a><p>Find refrigerator replacement parts by brand, model number or manufacturer part number.</p></div>' +
       '<div><h4>Navigation</h4><ul><li><a href="#/">Home</a></li><li><a href="#/brands">Brands</a></li></ul></div>' +
       '<div><h4>Customer Information</h4><ul><li><a href="#/shipping-returns">Shipping &amp; Returns</a></li><li><a href="#/warranty">Warranty</a></li><li><a href="#/privacy">Privacy Policy</a></li><li><a href="#/terms">Terms &amp; Conditions</a></li></ul></div>' +
       '<div><h4>Catalogue</h4><ul class="ft-cat">' + D.brands.filter(function (b) { return b.active; }).map(function (b) { return '<li><a href="#/brand/' + b.slug + '">' + esc(b.name) + '</a></li>'; }).join('') + '</ul></div>' +
@@ -132,20 +130,21 @@
       [ICON.bag, 'Online Ordering', 'Select your part and purchase through the online store.']
     ];
     return '' +
-    '<section class="hero hero-photo on-dark"><img class="hero-bg" src="img/hero-kitchen.jpg" alt="Stainless steel refrigerator in a modern kitchen" fetchpriority="high"><div class="hero-shade"></div>' +
-      '<div class="wrap hero-copy"><span class="eyebrow hero-in">Refrigerator Replacement Parts</span>' +
+    '<section class="hero"><div class="wrap hero-grid"><div class="hero-copy">' +
+      '<span class="eyebrow hero-in">Refrigerator Replacement Parts</span>' +
       '<h1 class="hero-in" style="--d:.08s">Find the Right Part for Your <em>Refrigerator</em></h1>' +
       '<p class="lead hero-in" style="--d:.16s">Search by your refrigerator model number or manufacturer part number to find the parts available for your appliance.</p>' +
       '<div class="hero-in" style="--d:.24s">' + searchForm({ lg: true, ph: 'Search by model number or part number', cta: 'Search', label: 'Primary search' }) +
       '<p class="field-note">Enter the complete model number or manufacturer part number.</p>' +
       '<div class="hero-actions"><a class="btn btn-ghost" href="#/brands">Browse Brands</a></div></div></div>' +
-      '<div class="hero-parts" aria-hidden="true"><div class="fl a">' + A.drawer() + '</div><div class="fl b">' + A.filter() + '</div><div class="fl c">' + A.shelf() + '</div></div></section>' +
+      '<div class="hero-visual hero-in" style="--d:.2s" aria-hidden="true"><div class="hv-shape"></div><img class="hv-photo" src="img/hero-kitchen.jpg" alt="" fetchpriority="high">' +
+      '<div class="fl a">' + A.drawer() + '</div><div class="fl b">' + A.filter() + '</div></div></div></section>' +
 
     '<section class="section" id="brands"><div class="wrap"><div class="sec-head reveal"><span class="eyebrow">Shop by Brand</span><h2 class="h2">Find Parts by Refrigerator Brand</h2>' +
       '<p class="lead">Select your refrigerator brand to explore available models and compatible replacement parts.</p></div>' +
       '<div class="brand-grid">' + D.brands.filter(function (b) { return b.active; }).map(brandCard).join('') + '</div></div></section>' +
 
-    '<section class="section steps-sec on-dark"><div class="wrap"><div class="sec-head reveal"><span class="eyebrow">Simple Part Finding</span><h2 class="h2">Find Your Part in Four Steps</h2></div>' +
+    '<section class="section steps-sec"><div class="wrap"><div class="sec-head reveal"><span class="eyebrow">Simple Part Finding</span><h2 class="h2">Find Your Part in Four Steps</h2></div>' +
       '<div class="steps">' + steps.map(function (s, i) {
         return '<div class="step reveal" style="--d:' + i * .08 + 's"><span class="step-no">0' + (i + 1) + '</span><div class="step-art" aria-hidden="true">' + stepArt[i] + '</div><h3>' + s[0] + '</h3><p>' + s[1] + '</p></div>';
       }).join('') + '</div></div></section>' +
@@ -169,11 +168,11 @@
     '<section class="section"><div class="wrap"><div class="sec-head reveal"><span class="eyebrow">A Clearer Way to Find Parts</span><h2 class="h2">Search With Confidence</h2></div>' +
       '<div class="benefits trust">' + ben.map(function (b, i) { return '<div class="benefit reveal" style="--d:' + i * .08 + 's"><div class="b-ico">' + b[0] + '</div><h3>' + b[1] + '</h3><p>' + b[2] + '</p></div>'; }).join('') + '</div></div></section>' +
 
-    '<section class="section featured on-dark"><div class="wrap feat-grid"><div class="reveal"><span class="eyebrow">Catalogue</span><h2 class="h2">The Parts You Need, Clearly Presented</h2>' +
+    '<section class="section featured"><div class="wrap feat-grid"><div class="reveal"><span class="eyebrow">Catalogue</span><h2 class="h2">The Parts You Need, Clearly Presented</h2>' +
       '<p class="lead">Explore refrigerator replacement parts with product information and compatibility details designed to help you identify the right part for your appliance.</p></div>' +
       '<div class="feat-stage reveal" aria-hidden="true"><img class="feat-photo" src="img/open-fridge.jpg" alt="" loading="lazy"><div class="fl p1">' + A.drawer() + '</div><div class="fl p2">' + A.shelf() + '</div><div class="fl p3">' + A.filter() + '</div></div></div></section>' +
 
-    '<section class="section final"><div class="wrap"><div class="final-card on-dark reveal"><img class="final-bg" src="img/kitchen-wide.jpg" alt="" loading="lazy"><div class="final-shade"></div><div class="deco l" aria-hidden="true">' + A.drawer() + '</div><div class="deco r" aria-hidden="true">' + A.filter() + '</div>' +
+    '<section class="section final"><div class="wrap"><div class="final-card on-dark reveal"><div class="deco l" aria-hidden="true">' + A.drawer() + '</div><div class="deco r" aria-hidden="true">' + A.filter() + '</div>' +
       '<h2>Looking for a Specific Refrigerator Part?</h2><p>Search by model number or manufacturer part number to find the parts available for your refrigerator.</p>' +
       '<div class="row"><button class="btn btn-primary" data-focus-search>Search Parts</button><a class="btn btn-ghost" href="#/brands">Browse Brands</a></div></div></div></section>';
   }
