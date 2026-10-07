@@ -21,6 +21,10 @@
     model: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M6 10h12M9 5.5v2M9 13v3"/></svg>',
     part: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5h3M17 5h3v3M20 16v3h-3M7 19H4v-3M8 9v6M11 9v6M14 9v6M17 9v6"/></svg>',
     compat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><rect x="3.5" y="3.5" width="17" height="17" rx="4"/></svg>',
+    shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5.5c0 4.3 2.9 8 7 9.5 4.1-1.5 7-5.2 7-9.5V6l-7-3Z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg>',
+    tag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12.2V4.5a1 1 0 0 1 1-1h7.7l8.3 8.3a1.5 1.5 0 0 1 0 2.1l-5.6 5.6a1.5 1.5 0 0 1-2.1 0L3.5 12.2Z"/><circle cx="8.2" cy="8.2" r="1.3"/></svg>',
+    truck: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5h11v10H2zM13 10h4.5l3.5 3.5v3H13"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="16.5" cy="17.5" r="1.8"/></svg>',
+    headset: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13.5" width="4" height="6" rx="1.5"/><rect x="17" y="13.5" width="4" height="6" rx="1.5"/><path d="M19 19.5c0 1.4-1.6 2-4 2h-2"/></svg>',
     bag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>'
   };
 
@@ -62,7 +66,7 @@
   }
   function brandCard(b, i) {
         return '<a class="brand-card reveal" style="--d:' + (i % 3) * 0.07 + 's" href="#/brand/' + b.slug + '" aria-label="' + esc(b.name) + ' refrigerator parts">' +
-      '<span class="brand-logo">' + esc(b.name) + '</span>' +
+      '<span class="brand-logo"><img src="img/brands/' + b.slug + '.png" alt="' + esc(b.name) + '" loading="lazy"></span>' +
       '<span class="brand-meta"><span>Refrigerator Parts</span><span class="arrow">' + ICON.arrow + '</span></span></a>';
   }
   function crumbs(items) {
@@ -124,10 +128,10 @@
       ['Order Your Part', 'Select the required part and purchase it through the online store.']
     ];
     var ben = [
-      [ICON.model, 'Exact Model Search', 'Find parts associated with your specific refrigerator model.'],
-      [ICON.part, 'Manufacturer Part Numbers', 'Search directly using the manufacturer\'s part number.'],
-      [ICON.compat, 'Compatibility Information', 'View compatible refrigerator models on applicable product pages.'],
-      [ICON.bag, 'Online Ordering', 'Select your part and purchase through the online store.']
+      [ICON.shield, 'High-Quality Parts', 'Durable, reliable<br>replacement parts.'],
+      [ICON.tag, 'Great Prices', 'Save compared<br>to appliance repairs.'],
+      [ICON.truck, 'Fast Shipping<br>in Canada', 'Get your parts quickly,<br>right to your door.'],
+      [ICON.headset, 'Expert Support', 'Need help finding<br>the right part?<br>We\'re here for you.']
     ];
     return '' +
     '<section class="hero"><div class="wrap hero-grid"><div class="hero-copy">' +
@@ -140,9 +144,10 @@
       '<div class="hero-visual hero-in" style="--d:.2s" aria-hidden="true"><div class="hv-shape"></div><img class="hv-photo" src="img/hero-kitchen.jpg" alt="" fetchpriority="high">' +
       '<div class="fl a">' + A.drawer() + '</div><div class="fl b">' + A.filter() + '</div></div></div></section>' +
 
-    '<section class="section" id="brands"><div class="wrap"><div class="sec-head reveal"><span class="eyebrow">Shop by Brand</span><h2 class="h2">Find Parts by Refrigerator Brand</h2>' +
-      '<p class="lead">Select your refrigerator brand to explore available models and compatible replacement parts.</p></div>' +
-      '<div class="brand-grid">' + D.brands.filter(function (b) { return b.active; }).map(brandCard).join('') + '</div></div></section>' +
+    '<section class="brand-strip" id="brands"><div class="wrap"><div class="bs-head"><h2>Shop by Brand</h2><a href="#/brands">View all brands ' + ICON.arrow + '</a></div>' +
+      '<div class="bs-grid">' + D.brands.filter(function (b) { return b.active; }).map(function (b) {
+        return '<a class="bs-tile" href="#/brand/' + b.slug + '" aria-label="' + esc(b.name) + ' refrigerator parts"><img class="bw bw-' + b.slug + '" src="img/brands/' + b.slug + '.png" alt="' + esc(b.name) + '" loading="lazy"><svg viewBox="0 0 8 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m1.5 1.5 5 4.5-5 4.5"/></svg></a>';
+      }).join('') + '</div></div></section>' +
 
     '<section class="section steps-sec"><div class="wrap"><div class="sec-head reveal"><span class="eyebrow">Simple Part Finding</span><h2 class="h2">Find Your Part in Four Steps</h2></div>' +
       '<div class="steps">' + steps.map(function (s, i) {
@@ -165,12 +170,17 @@
       '<p class="lead">Can\'t find your refrigerator model or the part you need? Send us the details and we\'ll have your request available for the appropriate follow-up.</p></div>' +
       requestForm() + '</div></section>' +
 
-    '<section class="section"><div class="wrap"><div class="sec-head reveal"><span class="eyebrow">A Clearer Way to Find Parts</span><h2 class="h2">Search With Confidence</h2></div>' +
-      '<div class="benefits trust">' + ben.map(function (b, i) { return '<div class="benefit reveal" style="--d:' + i * .08 + 's"><div class="b-ico">' + b[0] + '</div><h3>' + b[1] + '</h3><p>' + b[2] + '</p></div>'; }).join('') + '</div></div></section>' +
+    '<section class="section why"><div class="wrap"><div class="sec-head center reveal"><span class="why-eyebrow">Why Buy From Us</span><h2 class="h2">Reliable Parts. Better Prices. Less Hassle.</h2></div>' +
+      '<div class="why-grid">' + ben.map(function (b, i) { return '<div class="why-item reveal" style="--d:' + i * .08 + 's"><div class="why-ico">' + b[0] + '</div><h3>' + b[1] + '</h3><p>' + b[2] + '</p></div>'; }).join('') + '</div></div></section>' +
 
-    '<section class="section featured"><div class="wrap feat-grid"><div class="reveal"><span class="eyebrow">Catalogue</span><h2 class="h2">The Parts You Need, Clearly Presented</h2>' +
-      '<p class="lead">Explore refrigerator replacement parts with product information and compatibility details designed to help you identify the right part for your appliance.</p></div>' +
-      '<div class="feat-stage reveal" aria-hidden="true"><img class="feat-photo" src="img/open-fridge.jpg" alt="" loading="lazy"><div class="fl p1">' + A.drawer() + '</div><div class="fl p2">' + A.shelf() + '</div><div class="fl p3">' + A.filter() + '</div></div></div></section>' +
+    '<section class="mn-sec"><div class="wrap"><div class="mn reveal"><div class="mn-copy"><h2>Where to Find Your Model Number</h2>' +
+      '<p>Your <b>refrigerator model number</b> is usually inside the fridge on a side wall or ceiling, or on a label at the back.</p>' +
+      '<button class="btn btn-ghost mn-btn" type="button" aria-expanded="false" aria-controls="mn-ex" data-mn-toggle>View examples ' + ICON.arrow + '</button></div>' +
+      '<div class="mn-visual" aria-hidden="true"><img src="img/open-fridge.jpg" alt="" loading="lazy">' +
+        '<div class="mn-plate"><small>MODEL / MODÈLE</small><b>XXXXXXXXXX</b><small>SERIAL NO. / N° DE SÉRIE</small><b>XXXXXXXXXXXX</b></div>' +
+        '<svg class="mn-arrow" viewBox="0 0 60 40" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M56 6C40 4 20 10 8 30M8 30l2-12M8 30l12-4"/></svg>' +
+        '<span class="mn-note">Model number is usually inside the fridge on the wall or ceiling.</span></div>' +
+      '<div class="mn-ex" id="mn-ex" hidden><h3>Common locations</h3><ul><li>Inside the fresh-food compartment, on the left or right side wall</li><li>On the ceiling of the fridge, near the light</li><li>Behind the crisper drawers or along the top edge of the door frame</li><li>On a label on the back of the refrigerator</li></ul></div></div></div></section>' +
 
     '<section class="section final"><div class="wrap"><div class="final-card on-dark reveal"><div class="deco l" aria-hidden="true">' + A.drawer() + '</div><div class="deco r" aria-hidden="true">' + A.filter() + '</div>' +
       '<h2>Looking for a Specific Refrigerator Part?</h2><p>Search by model number or manufacturer part number to find the parts available for your refrigerator.</p>' +
@@ -362,7 +372,7 @@
     var tg = e.target.closest('[data-mega-toggle]');
     if (tg) { setMega(tg.getAttribute('aria-expanded') !== 'true'); return; }
     if (!e.target.closest('#mega, .nav-mega')) setMega(false); else if (e.target.closest('#mega a, #mega button')) setMega(false);
-    var t = e.target.closest('[data-request],[data-open-cart],[data-close-cart],[data-remove],[data-add],[data-qty],[data-focus-search]');
+    var t = e.target.closest('[data-request],[data-open-cart],[data-close-cart],[data-remove],[data-add],[data-qty],[data-focus-search],[data-mn-toggle]');
     if (!t) { var cp = document.getElementById('cart-panel'); if (!cp.hidden && !e.target.closest('#cart-panel')) cp.hidden = true; return; }
     if (t.hasAttribute('data-request')) openRequest(t.dataset.request, t.dataset.value);
     else if (t.hasAttribute('data-open-cart')) { e.stopPropagation(); openCart(); }
@@ -370,6 +380,7 @@
     else if (t.hasAttribute('data-remove')) { cart = cart.filter(function (i) { return i.slug !== t.dataset.remove; }); saveCart(); openCart(); }
     else if (t.hasAttribute('data-add')) addToCart(t.dataset.add, Math.max(1, parseInt(document.getElementById('qty').value, 10) || 1));
     else if (t.hasAttribute('data-qty')) { var i = document.getElementById('qty'); i.value = Math.min(+i.max, Math.max(1, (+i.value || 1) + +t.dataset.qty)); }
+    else if (t.hasAttribute('data-mn-toggle')) { var ex = document.getElementById('mn-ex'); ex.hidden = !ex.hidden; t.setAttribute('aria-expanded', String(!ex.hidden)); }
     else if (t.hasAttribute('data-focus-search')) { window.scrollTo({ top: 0, behavior: 'smooth' }); setTimeout(function () { var i = document.querySelector('.hd-search input'); if (i) i.focus(); }, 350); }
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { document.getElementById('cart-panel').hidden = true; setMega(false); } });
